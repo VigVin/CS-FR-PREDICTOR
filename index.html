@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concrete Predictor Dashboard</title>
+</head>
+<body>
+    <h1>🔥 Hybrid ML: Predict Concrete Performance</h1>
+    <form method="post">
+        <label>Cement:</label><input name="cement"><br>
+        <label>Coarse Aggregate:</label><input name="coarse"><br>
+        <label>Fine Aggregate:</label><input name="fine"><br>
+        <label>Water-Cement Ratio:</label><input name="wcr"><br>
+        <label>Aggregate Type (0/1/2):</label><input name="agg_type"><br>
+        <label>Density:</label><input name="density"><br>
+        <label>Thickness (mm):</label><input name="thickness"><br>
+        <label>Fiber Type (0/1/2/3):</label><input name="fiber"><br>
+        <label>Silica Fume (%):</label><input name="sfume"><br>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction %}
+        {% if prediction.error %}
+            <p style="color: red;">Error: {{ prediction.error }}</p>
+        {% else %}
+            <h3>📊 Predicted Fire Resistance: {{ prediction.fire }} min</h3>
+            <h3>💪 Predicted Compressive Strength: {{ prediction.strength }} MPa</h3>
+        {% endif %}
+    {% endif %}
+
+    <hr>
+    <h2>📉 Model Evaluation Charts</h2>
+    <img src="/static/fire_r2_comparison.png" width="400">
+    <img src="/static/strength_r2_comparison.png" width="400">
+
+    <h2>🧠 SHAP Explainability</h2>
+    <img src="/static/shap_summary_fire.png" width="400">
+    <img src="/static/shap_summary_strength.png" width="400">
+</body>
+</html>
